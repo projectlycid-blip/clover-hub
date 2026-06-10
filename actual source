@@ -26,7 +26,7 @@ text.Parent = frame
 
 -- Intro song (replace with your asset id)
 local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://YOUR_AUDIO_ID_HERE"
+sound.SoundId = "rbxassetid://1843529634"
 sound.Volume = 1
 sound.Looped = false
 sound.Parent = workspace
