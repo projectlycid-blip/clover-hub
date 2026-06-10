@@ -1,4 +1,69 @@
-local Players         = game:GetService("Players")
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- GUI setup
+local gui = Instance.new("ScreenGui")
+gui.Name = "CloverIntro"
+gui.ResetOnSpawn = false
+gui.Parent = playerGui
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(1,0,1,0)
+frame.BackgroundColor3 = Color3.fromRGB(0,0,0)
+frame.Parent = gui
+
+local text = Instance.new("TextLabel")
+text.Size = UDim2.new(1,0,1,0)
+text.BackgroundTransparency = 1
+text.Text = "CLOVER HUB"
+text.TextColor3 = Color3.fromRGB(0, 255, 0)
+text.Font = Enum.Font.GothamBlack
+text.TextScaled = true
+text.Parent = frame
+
+-- Intro song (replace with your asset id)
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://YOUR_AUDIO_ID_HERE"
+sound.Volume = 1
+sound.Looped = false
+sound.Parent = workspace
+
+sound:Play()
+
+-- Flashing / pulsing effect
+local flashing = true
+
+task.spawn(function()
+	while flashing do
+		local tween1 = TweenService:Create(text, TweenInfo.new(0.25), {
+			TextTransparency = 0
+		})
+		local tween2 = TweenService:Create(text, TweenInfo.new(0.25), {
+			TextTransparency = 0.7
+		})
+
+		tween1:Play()
+		tween1.Completed:Wait()
+
+		tween2:Play()
+		tween2.Completed:Wait()
+	end
+end)
+
+-- End intro after sound ends
+sound.Ended:Connect(function()
+	flashing = false
+	gui:Destroy()
+end)
+
+-- fallback remove after 8 seconds
+task.delay(8, function()
+	flashing = false
+	gui:Destroy()
+end)local Players         = game:GetService("Players")
 local RunService      = game:GetService("RunService")
 local UIS             = game:GetService("UserInputService")
 local TweenService    = game:GetService("TweenService")
