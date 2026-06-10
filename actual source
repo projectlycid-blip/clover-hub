@@ -5,10 +5,11 @@ local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
 -- GUI setup
+local player = game.Players.LocalPlayer
 local gui = Instance.new("ScreenGui")
 gui.Name = "CloverIntro"
 gui.ResetOnSpawn = false
-gui.Parent = playerGui
+gui.Parent = player:WaitForChild("PlayerGui")
 
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(1,0,1,0)
@@ -3222,3 +3223,4 @@ task.spawn(function()
 end)
 
 print("[Clover Hub V5.4] Loaded successfully!")
+print("Clover intro script is running")
